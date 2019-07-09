@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {
   TouchableOpacity,
   Text,
+  View,
 } from 'react-native';
 import PropTypes from 'prop-types';
 
@@ -60,7 +61,6 @@ class Day extends Component {
       containerStyle.push(this.style.today);
       textStyle.push(this.style.todayText);
     }
-
     if (marking.customStyles && typeof marking.customStyles === 'object') {
       const styles = marking.customStyles;
       if (styles.container) {
@@ -83,6 +83,14 @@ class Day extends Component {
         activeOpacity={marking.activeOpacity}
         disabled={marking.disableTouchEvent}
       >
+        {
+          marking.customStyles && marking.customStyles.dot && typeof marking.customStyles.dot === 'object' ?
+          <View style={[marking.customStyles.dot, { position: 'absolute' }]}>
+            
+          </View>
+          :
+          null
+        }
         <Text allowFontScaling={false} style={textStyle}>{String(this.props.children)}</Text>
       </TouchableOpacity>
     );
